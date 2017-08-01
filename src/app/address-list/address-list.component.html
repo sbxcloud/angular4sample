@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>Direcciones</h3>
+    </div>
+    <div class="col-lg-6">
+      <button type="button" class="btn btn-success" (click)="newAddress()">NUEVA</button>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr class="info">
+        <th class="col-sm-3">DIRECCIÓN</th>
+        <th class="col-sm-1">TELÉFONO</th>
+        <th class="col-sm-3">CIUDAD</th>
+        <th class="col-sm-2">BARRIO</th>
+        <th class="col-sm-3">ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let address of addresses" (click)="select(address)">
+        <td>{{address.address}} {{address.building}} {{address.interior}}</td>
+        <td class="text-center">{{address.phone}}</td>
+        <td>{{address.city.name}} - {{address.zone.name}}</td>
+        <td>{{address.neighborhood}}</td>
+        <td>
+          <button type="button" class="btn btn-warning" (click)="edit(address)">EDITAR</button>
+          <button type="button" class="btn btn-danger" (click)="delete(address)">ELIMINAR</button>
+        </td>
+      </tr>
+      <tr *ngIf="!addresses.length">
+        <td colspan="9" class="text-center text-primary">
+          <i class="fa fa-refresh fa-spin fa-lg"></i> CARGANDO
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
