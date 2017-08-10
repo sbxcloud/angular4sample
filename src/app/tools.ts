@@ -10,7 +10,7 @@ export const ROUTES: Routes = [
 
 export class Constants {
   public static APP_KEY = 'bcd45fa-abc345-777bcd-bde53-98089';
-  public static CURRENT_DOMAIN = 98;
+  public static CURRENT_DOMAIN = 182;
   public static URLS = { api: 'https://sbxcloud.com/api',
             register: '/user/v1/register',
             login: '/user/v1/login',

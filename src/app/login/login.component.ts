@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../_services/session.service';
+import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,10 +11,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   user = { email: '', password: '' };
 
-  constructor(private session: SessionService, private router: Router) { }
+  constructor(private session: SessionService, private router: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    console.log(this.session.isAuth());
+    if (this.session.isAuth()) {
+      this.router.navigateByUrl('addresses');
+    }
   }
 
   login() {
@@ -21,7 +24,7 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.router.navigateByUrl('addresses');
       }else {
-        this.router.navigateByUrl('addresses');
+        this.alertify.error(data.error);
       }
     });
   }

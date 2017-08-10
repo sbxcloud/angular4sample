@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
-import { LocalStorageService } from './local-storage.service';
 import { CommonService } from './common.service';
 import { Constants } from '../tools';
 import 'rxjs/add/operator/toPromise';
@@ -8,13 +7,13 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class SessionService {
 
-  constructor(private http: Http, private storage: LocalStorageService, private common: CommonService) { }
+  constructor(private http: Http, private common: CommonService) { }
 
   isAuth() {
     try {
-      return this.storage.getData['user'].token !== null;
+      return this.common.getData('user')['token'] !== null;
     }catch ( err ) {
-      this.storage.setData('user', { token: null });
+      this.common.setData('user', { 'token': null });
       return false;
     }
   }
@@ -28,7 +27,7 @@ export class SessionService {
         data = data.json();
         if (data['success']) {
           data['user']['token'] = data['token'];
-          this.storage.setData('user', data['user']);
+          this.common.setData('user', data['user']);
           callback({success: true});
         }else {
           callback(data);

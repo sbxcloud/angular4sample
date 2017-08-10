@@ -7,7 +7,7 @@ import { ROUTES } from './tools';
 
 import { CommonService } from './_services/common.service';
 import { SessionService } from './_services/session.service';
-import { LocalStorageService } from './_services/local-storage.service';
+import { AlertifyService } from './_services/alertify.service';
 
 import { AppComponent } from './app.component';
 import { AddressListComponent } from './address-list/address-list.component';
@@ -27,8 +27,8 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     CommonService,
-    LocalStorageService,
-    SessionService
+    SessionService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })

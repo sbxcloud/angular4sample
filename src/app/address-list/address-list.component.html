@@ -3,36 +3,86 @@
     <div class="col-lg-6">
       <h3>Direcciones</h3>
     </div>
-    <div class="col-lg-6">
-      <button type="button" class="btn btn-success" (click)="newAddress()">NUEVA</button>
+  </div>
+  <div class="row">
+    <div class="col-lg-7">
+      <table class="table table-hover table-bordered table-condenset">
+        <thead>
+          <tr class="info">
+            <th class="col-sm-3">DIRECCIÓN</th>
+            <th class="col-sm-2">BARRIO</th>
+            <th class="col-sm-1">TELÉFONO</th>
+            <th class="col-sm-2">COMENTARIOS</th>
+            <th class="col-sm-3">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let address of addresses">
+            <td>{{address.address}}</td>
+            <td>{{address.neighborhood}}</td>
+            <td>{{address.phone}}</td>
+            <td>{{address.comments}}</td>
+            <td>
+              <button type="button" class="btn btn-warning btn-sm" (click)="edit(address)">EDITAR</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="delete(address)">ELIMINAR</button>
+            </td>
+          </tr>
+          <tr *ngIf="isLoading">
+            <td colspan="9" class="text-center text-primary">
+              <i class="fa fa-refresh fa-spin fa-lg"></i> CARGANDO
+            </td>
+          </tr>
+          <tr *ngIf="!isLoading && !addresses.length">
+            <td colspan="9" class="text-center text-primary">
+              Sin datos en guardados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-4 col-lg-offset-1 card soft">
+      <form name="New_Class_Form" novalidate>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Direccion</label>
+              <input type="text" name="address" class="form-control" placeholder="Dirrecion" [(ngModel)]="address.address">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Barrio</label>
+              <input type="text" name="neighborhood" class="form-control" placeholder="Barrio" [(ngModel)]="address.neighborhood">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="number" name="phone" class="form-control" placeholder="Telefono" [(ngModel)]="address.phone">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Comentarios</label>
+              <input type="text" name="comments" class="form-control" placeholder="Barrio" [(ngModel)]="address.comments">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <button class="btn btn-success btn-block" (click)="newAddress()">Guardar</button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <button class="btn btn-default btn-block" (click)="cancel()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <table class="table table-hover table-bordered">
-    <thead>
-      <tr class="info">
-        <th class="col-sm-3">DIRECCIÓN</th>
-        <th class="col-sm-1">TELÉFONO</th>
-        <th class="col-sm-3">CIUDAD</th>
-        <th class="col-sm-2">BARRIO</th>
-        <th class="col-sm-3">ACCIONES</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let address of addresses" (click)="select(address)">
-        <td>{{address.address}} {{address.building}} {{address.interior}}</td>
-        <td class="text-center">{{address.phone}}</td>
-        <td>{{address.city.name}} - {{address.zone.name}}</td>
-        <td>{{address.neighborhood}}</td>
-        <td>
-          <button type="button" class="btn btn-warning" (click)="edit(address)">EDITAR</button>
-          <button type="button" class="btn btn-danger" (click)="delete(address)">ELIMINAR</button>
-        </td>
-      </tr>
-      <tr *ngIf="!addresses.length">
-        <td colspan="9" class="text-center text-primary">
-          <i class="fa fa-refresh fa-spin fa-lg"></i> CARGANDO
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
